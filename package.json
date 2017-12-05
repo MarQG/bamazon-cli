@@ -1,0 +1,23 @@
+{
+  "name": "bamazon-cli",
+  "version": "1.0.0",
+  "description": "Bamazon-CLI is a node command line interface that interacts with the Bamazon SQL Database. It allows the users to view and purchase items from the inventory. It allows Managers to edit and manage the products in the Bamazon database. Lastly it allows Supervisors to view departments and sales data for reports.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarQG/bamazon-cli.git"
+  },
+  "author": "Ferenc Gutierrez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarQG/bamazon-cli/issues"
+  },
+  "homepage": "https://github.com/MarQG/bamazon-cli#readme",
+  "dependencies": {
+    "inquirer": "^4.0.1",
+    "mysql": "^2.15.0"
+  }
+}
