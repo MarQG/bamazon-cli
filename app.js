@@ -1,5 +1,6 @@
 var inquirer = require('inquirer');
 var Customer = require('./scripts/bamazonCustomer.js');
+var Manager = require('./scripts/bamazonManager.js');
 
 var runP = true;
 var runPChoices = [
@@ -10,7 +11,7 @@ var runPChoices = [
     "Exit: Leave Bamazon."
   ];
 
-
+var managerPass = 'BamazonMan2017';
 
 function loadCommand(command){
     switch(command){
@@ -20,24 +21,44 @@ function loadCommand(command){
             break;
         case "Manager":
             console.log("Manager loading...");
-            runProgram(runP);
+            checkPassword(managerPass);
             break;
         case "Supervisor":
             console.log("Supervisor loading...");
             runProgram(runP);
             break;
         case "Exit":
-            console.log("Exit loading...");
             runProgram(false);
             break;
         default:
+            console.log("Something went wrong. Command: " + command);
             runProgram(false);
             break;
     }
 }
 
+function checkPassword(password){
+    inquirer.prompt({
+        name: 'manPass',
+        type: 'input',
+        message: 'Please enter the Manager Password: (You can type exit to go back to the main menu)' 
+     }).then(function(answer){
+         if(answer.manPass === 'exit'){
+             runProgram(true);
+         } else if(answer.manPass === password){
+             console.log("Awesome You are the Man(ager)!");
+             var newManager = new Manager();
+             newManager.start(runProgram);
+         } else {
+             console.log("Sorry wrong password!");
+             checkPassword();
+         }
+     });
+}
+
 function runProgram(run){
     if(run){
+        console.log('\x1Bc');
         var message =   
                 '============================== \n' +
                 '  =      Welcome to Bamazon    = \n' +
