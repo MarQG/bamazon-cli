@@ -1,21 +1,15 @@
 var mysql = require('mysql');
 var inquirer = require('inquirer');
-var databaseKey = require('../database_key.js');
 
-var connection = mysql.createConnection(databaseKey);
-
-var Customer = function(){
+var Customer = function(sql){
+    this.sql = sql;
     this.start = function(callback){
-        connection.connect(function(err){
-            this.start(callback);
-        });
+        
 
         var that = this;
         var items = [];
-        connection.query("SELECT * FROM products", function(err, res){
-            if(err){
-                return console.log("Error Occured: " + err);
-            }
+        this.sql.query("SELECT * FROM products", function(err, res){
+            if(err)throw err;
             res.forEach(function(item){
                 items.push( item.item_id + ") " + item.product_name + " price: $" + item.price);                                        
             });
@@ -55,15 +49,16 @@ var Customer = function(){
     this.purchase = function(choice, amount, dbItem, callback){
         var quantity = parseInt(amount);
         var reduceStock = dbItem.stock_quantity - quantity;
-        var increaseSales = dbItem.product_sales + quantity;
-        var purchasePrice = quantity * parseFloat(dbItem.price);
+        var purchasePrice = dbItem.product_sales + (quantity * parseFloat(dbItem.price));
         if(reduceStock >= 0){ 
-            var updateSql = mysql.format("UPDATE products SET stock_quantity = ?, product_sales = ? WHERE item_id = ?", [reduceStock, increaseSales, parseInt(choice)]);
-            connection.query(updateSql, function(err, res){
-                if(err){
-                    console.log(err);
-                }
-                console.log("Your order has been successfully placed. Total Cost: $" + purchasePrice);
+            this.sql.query( "UPDATE products SET ? WHERE ?", [{
+                stock_quantity: reduceStock,
+                product_sales: purchasePrice
+            }, {
+                item_id: parseInt(choice)
+            }], function(err, res){
+                if(err) throw err;
+                console.log("Your order has been successfully placed. Total Cost: $" + (quantity * parseFloat(dbItem.price)));
             });
             this.start(callback);
         } else {
