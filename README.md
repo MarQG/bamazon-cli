@@ -25,7 +25,7 @@ The Customer View is where customers order from Bamazon. It will ask which item 
 
 ![Customer View](./screens/cus-order.png?raw=true "Customer View")
 
-![Customer Exit](./screens/cus-exit.png?raw=true "Customer Exit")
+![Customer Exit](./screens/cus-order-exit.png?raw=true "Customer Exit")
 
 * Customer View - Lets the user scroll through available products to select one to purchase or e) to return to the main menu;
 
