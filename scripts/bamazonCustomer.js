@@ -4,8 +4,6 @@ var inquirer = require('inquirer');
 var Customer = function(sql){
     this.sql = sql;
     this.start = function(callback){
-        
-
         var that = this;
         var items = [];
         this.sql.query("SELECT * FROM products", function(err, res){
@@ -62,7 +60,7 @@ var Customer = function(sql){
             });
             this.start(callback);
         } else {
-                console.log("Insufficient stock quantity! Please check back later");
+            console.log("Insufficient stock quantity! Please check back later");
             this.start(callback);
         }
     }

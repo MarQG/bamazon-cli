@@ -6,7 +6,6 @@ var Manager = function(sql){
     this.sql = sql;
     this.start = function(callback){
         var that = this;
-        
         var menuChoices = [
             "i) View Current Inventory",
             "l) View Low Inventory",
