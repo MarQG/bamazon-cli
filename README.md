@@ -37,6 +37,8 @@ The Manager Panel is where Managers can login via a password and manage the inve
 
 ![Manager Panel](./screens/man-panel-login.png?raw=true "Manager Panel")
 
+![Manager View](./screens/man-panel-view.png?raw=true "Manager View")
+
 ![Manager Low](./screens/man-panel-view-low.png?raw=true "Manager Low")
 
 ![Manager Add](./screens/man-panel-add-inv.png?raw=true "Mananger Add")
